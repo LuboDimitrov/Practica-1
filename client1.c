@@ -33,6 +33,7 @@ void str_trim_lf(char *arr, int length)
     }
 }
 
+//Function to detect when the client exits the program via Ctrl+C
 void catch_ctrl_c_and_exit(int sig)
 {
     flag = 1;
@@ -47,7 +48,7 @@ void send_msg_handler()
 
     sprintf(buffer, "%s: %s\n", name, "Got your back buddy!");
     send(sockfd, buffer, strlen(buffer), 0);
-
+    //flush the buffers
     bzero(message, LENGTH);
     bzero(buffer, LENGTH + 32);
 
@@ -72,7 +73,9 @@ void send_msg_handler()
 } */
 
 /*Due to several problems, we dont read the help message from the server
-and we only send them help 30% of the time*/
+and we only send them help 30% of the time. To send messages 30% of the time
+we generate a number between 0 an 10 and check if the number is less than 3 since
+the probability of it being less than 3 is 30%*/
 
 void help_handler()
 {
@@ -102,17 +105,13 @@ void help_handler()
 
 int main(int argc, char **argv)
 {
-    if (argc != 2)
-    {
-        printf("Usage: %s <PORT>\n", argv[0]);
-        return EXIT_FAILURE;
-    }
 
     char *ip = "127.0.0.1";
     int port = atoi(argv[1]);
 
     signal(SIGINT, catch_ctrl_c_and_exit);
 
+    //use the current time for the random seed
     srand(time(0));
     int random_id = rand() % 100;
 
@@ -144,6 +143,7 @@ int main(int argc, char **argv)
     pthread_t help_thread;
     pthread_create(&help_thread, NULL, (void *)help_handler, NULL);
 
+    //uncomment to recieve messages from the server
     /* pthread_t recv_msg_thread;
     pthread_create(&recv_msg_thread, NULL, (void *) recv_msg_handler, NULL); */
 
