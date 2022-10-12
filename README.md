@@ -4,6 +4,17 @@
 ### Introducción 
 En el siguiente docuemnto explicaré la realización de está práctica, el enfoque que se ha propuesto además de los problemas encontrados y como los he enfrentado.
 
+```mermaid
+sequenceDiagram
+Server->> Client 1:Help
+Server->> Client 2:Help
+Server->> Client N:Help
+Client 1-->>Server: Helping!
+Client 2-->>Server: Helping!
+
+Note right of Client N: The clients may not<br/>always send help<br/>since they only helps<br/>30% of the time
+```
+
 ## Explicación del código a alto nivel
 ### Servidor
 ```c
@@ -40,4 +51,12 @@ La función encargada de la ayuda se llama **help_handler**
 Se quería hacer una implementación en la que cada cliente pudiése enviar solo 1 mensaje de ayuda cada vez que el servidor pide ayuda, es decir, que un solo cliente no pueda ayudar 2 veces. Aunque no se ha logrado debido a diversos problemas, explicaré el enfoqué que seguí. Primero se pensó en terminar el thread del cliente una vez que haya ayudado pero eso no permetiría que ese cliente ayudáse nunca más por eso se introdujeron dos flags llamados **flagReceived** y **flagCanHelp**.
 El propósito del primer flag es que el cliente no se quedase bloqueado a la hora de recibir mensajes del servidor ya que el cliente a la hora de dormirse por un tiempo, por ejemplo 5 segundos no duerme solo 5 segundos sino que se queda bloqueado hasta que el servidor envía un mensaje. El propósito del flag **canHelp** es el de poder enviar solo un mensaje en la iteración actual, por ello se había pensado en ponerlo a 1 cuando recibimos un mensaje del servidor y a 0 cuando enviamos un mensaje de ayuda.
 
+## Instrucciones
+### Compilar
+> gcc Server1.c -o server
+> gcc client1.c -o client
+
+### Ejecutar
+> ./server
+> ./client
 
