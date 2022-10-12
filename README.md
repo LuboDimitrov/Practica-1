@@ -1,4 +1,4 @@
-# Practica 1
+# Práctica 1
 ## Gestión de múltiples clientes con sockets
 
 ### Introducción 
