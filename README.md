@@ -4,6 +4,7 @@
 ### Introducción 
 En el siguiente docuemnto explicaré la realización de está práctica, el enfoque que se ha propuesto además de los problemas encontrados y como los he enfrentado.
 
+## Diagrama de eventos
 ```mermaid
 sequenceDiagram
 Server->> Client 1:Help
@@ -53,10 +54,18 @@ El propósito del primer flag es que el cliente no se quedase bloqueado a la hor
 
 ## Instrucciones
 ### Compilar
-> gcc Server1.c -o server
-> gcc client1.c -o client
+```console
+gcc Server1.c -o server
+```
+```console
+gcc client1.c -o client
+```
 
 ### Ejecutar
-> ./server
-> ./client
+```console
+ ./server
+ ```
+```console
+ ./client
+ ```
 
