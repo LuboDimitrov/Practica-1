@@ -63,9 +63,9 @@ gcc client1.c -o client
 
 ### Ejecutar
 ```console
- ./server
+ ./server <PORT>
  ```
 ```console
- ./client
+ ./client <PORT>
  ```
 
